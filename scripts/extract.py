@@ -88,7 +88,7 @@ if __name__ == "__main__":
     mes_vigente = pega_mes_vigente()
     data        = formata_data_para_filtro(ano_vigente,mes_vigente)
     quantidade_emails_encontrados = quantidade_emails_encontrados_com_filtro(meu_email,data)
-    caminho = cria_caminho_salva_pdf("../data_raw/","fatura.pdf")
+    caminho = cria_caminho_salva_pdf("../data_raw/pdf/","fatura.pdf")
     nome_arquivo = formatando_nome_anexo(ano_vigente,mes_vigente)
     transforma_anexo_em_pdf(nome_arquivo,meu_email,caminho)
     

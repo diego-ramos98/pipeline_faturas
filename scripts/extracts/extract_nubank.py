@@ -29,7 +29,10 @@ if __name__ == "__main__":
 
 
 
-    salva_fatura = SalvaFatura(email_remetente="todomundo@nubank.com.br",data_envio=data_formatada,corpo_email_filtro="Sua fatura foi fechada",caminho="../data_raw/pdf/",nome_arquivo="fatura_nubank.pdf",mes_vigente=mes_vigente,ano_vigente=ano_vigente,meu_email=meu_email)
+    salva_fatura = SalvaFatura(email_remetente="todomundo@nubank.com.br",data_envio=data_formatada,corpo_email_filtro="Sua fatura foi fechada",caminho="../data_raw/pdf/",nome_arquivo="fatura_nubank.pdf",mes_vigente=mes_vigente,ano_vigente=ano_vigente,meu_email=meu_email,padrao_nome_fatura="Nubank_{(ano_vigente)}-0{(mes_vigente + 1)}-(0[1-9]|[12][0-9]|3[01]).pdf")
+
+
+    print(salva_fatura.formatando_nome_anexo())
 
     salva_fatura.salva_pdf()
 

@@ -38,6 +38,7 @@ class SalvaFatura:
                     print(self.formatando_nome_anexo())
                     if self.formatando_nome_anexo().search(anexo.filename):
                         info_anexo = anexo.payload
+                        print(self.cria_caminho_para_salvar_pdf())
                         with open(self.cria_caminho_para_salvar_pdf(),"wb") as fatura_pdf:
                             fatura_pdf.write(info_anexo)
 

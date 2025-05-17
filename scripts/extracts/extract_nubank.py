@@ -3,8 +3,8 @@ import os
 from models.salva_fatura import SalvaFatura
 from models.email_cliente import EmailCliente
 from models.formata_data import FormataDatas
-
-
+from datetime import date 
+import re
 
 
 if __name__ == "__main__":
@@ -15,9 +15,9 @@ if __name__ == "__main__":
 
     data = FormataDatas()
 
-    data_formatada = data.data_formatada()
+    data_formatada = date(2025,4,1)
     ano_vigente = data.recupera_ano_vigente()
-    mes_vigente = data.recupera_mes_vigente()
+    mes_vigente = 4
     
 
     email_cliente = EmailCliente(usuario=USUARIO,chave=CHAVE,servidor_email="imap.gmail.com",email_remetente="todomundo@nubank.com.br",corpo_email_filtro="Sua fatura foi fechada",data_formatada=data_formatada)
@@ -29,11 +29,9 @@ if __name__ == "__main__":
 
 
 
-    salva_fatura = SalvaFatura(email_remetente="todomundo@nubank.com.br",data_envio=data_formatada,corpo_email_filtro="Sua fatura foi fechada",caminho="../data_raw/pdf/",nome_arquivo="fatura_nubank.pdf",mes_vigente=mes_vigente,ano_vigente=ano_vigente,meu_email=meu_email,padrao_nome_fatura="Nubank_{(ano_vigente)}-0{(mes_vigente + 1)}-(0[1-9]|[12][0-9]|3[01]).pdf")
-
-
-    print(salva_fatura.formatando_nome_anexo())
-
+    salva_fatura = SalvaFatura(email_remetente="todomundo@nubank.com.br",data_envio=data_formatada,corpo_email_filtro="Sua fatura foi fechada",nome_fatura="Nubank",mes_vigente=mes_vigente,ano_vigente=ano_vigente,meu_email=meu_email,padrao_nome_fatura=re.compile(rf'Nubank_{(ano_vigente)}-0{(mes_vigente + 1)}-(0[1-9]|[12][0-9]|3[01]).pdf'))
+                               
+                              
     salva_fatura.salva_pdf()
 
 

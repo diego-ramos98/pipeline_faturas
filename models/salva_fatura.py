@@ -3,13 +3,11 @@ import os
 import re
 
 class SalvaFatura:
-    def __init__(self,email_remetente,data_envio,corpo_email_filtro,nome_fatura,mes_vigente,ano_vigente,meu_email,padrao_nome_fatura):
+    def __init__(self,email_remetente,data_envio,corpo_email_filtro,nome_fatura,meu_email,padrao_nome_fatura):
         self.email_remetente = email_remetente
         self.data_envio = data_envio
         self.corpo_email_filtro = corpo_email_filtro
         self.nome_fatura = nome_fatura
-        self.mes_vigente = mes_vigente
-        self.ano_vigente = ano_vigente
         self.meu_email = meu_email
         self.padrao_nome_fatura = padrao_nome_fatura
 

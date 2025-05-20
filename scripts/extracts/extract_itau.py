@@ -5,11 +5,7 @@ from models.email_cliente import EmailCliente
 from models.formata_data import FormataDatas
 import re
 
-if __name__ == "__main__":
-    dotenv.load_dotenv()
-    
-    USUARIO = os.getenv('USUARIO')
-    CHAVE  = os.getenv('CHAVE')
+def executa_extracao_itau(USUARIO,CHAVE):
 
     data = FormataDatas()
     data_formatada = data.data_formatada()
@@ -26,12 +22,7 @@ if __name__ == "__main__":
     print(f"Quantidade de emails encontrados: {quantidade_emails_encontrados}")
 
     
-
- 
-
-    salva_fatura = SalvaFatura(email_remetente="faturadigital@itau.com.br",data_envio=data_formatada,corpo_email_filtro="Sua fatura foi fechada",nome_fatura="itau",mes_vigente=mes_vigente,ano_vigente=ano_vigente,meu_email=meu_email,padrao_nome_fatura=re.compile(rf'Fatura_VISA_(\d{{12}})_0{mes_vigente}-{ano_vigente}.pdf'))
-
-
+    salva_fatura = SalvaFatura(email_remetente="faturadigital@itau.com.br",data_envio=data_formatada,corpo_email_filtro="Sua fatura foi fechada",nome_fatura="itau",meu_email=meu_email,padrao_nome_fatura=re.compile(rf'Fatura_VISA_(\d{{12}})_0{mes_vigente}-{ano_vigente}.pdf'))
 
 
     salva_fatura.salva_pdf()

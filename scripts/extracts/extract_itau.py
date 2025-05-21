@@ -22,7 +22,7 @@ def executa_extracao_itau(USUARIO,CHAVE):
     print(f"Quantidade de emails encontrados: {quantidade_emails_encontrados}")
 
     
-    salva_fatura = SalvaFatura(email_remetente="faturadigital@itau.com.br",data_envio=data_formatada,corpo_email_filtro="Sua fatura foi fechada",nome_fatura="itau",meu_email=meu_email,padrao_nome_fatura=re.compile(rf'Fatura_VISA_(\d{{12}})_0{mes_vigente}-{ano_vigente}.pdf'))
+    salva_fatura = SalvaFatura(email_remetente="faturadigital@itau.com.br",data_envio=data_formatada,corpo_email_filtro="Sua fatura foi fechada",nome_fatura=f"Itau_0{mes_vigente}-{ano_vigente}",meu_email=meu_email,padrao_nome_fatura=re.compile(rf'Fatura_VISA_(\d{{12}})_0{mes_vigente}-{ano_vigente}.pdf'))
 
 
     salva_fatura.salva_pdf()

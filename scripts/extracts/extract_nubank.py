@@ -23,7 +23,7 @@ def executa_extracao_nubank(USUARIO,CHAVE):
 
 
 
-    salva_fatura = SalvaFatura(email_remetente="todomundo@nubank.com.br",data_envio=date(ano_vigente,mes_vigente - 1,1),corpo_email_filtro="Sua fatura foi fechada",nome_fatura="Nubank",meu_email=meu_email,padrao_nome_fatura=re.compile(rf'Nubank_{(ano_vigente)}-0{(mes_vigente + 1)}-(0[1-9]|[12][0-9]|3[01]).pdf'))
+    salva_fatura = SalvaFatura(email_remetente="todomundo@nubank.com.br",data_envio=date(ano_vigente,mes_vigente - 1,1),corpo_email_filtro="Sua fatura foi fechada",nome_fatura=f"Nubank_0{mes_vigente}-{ano_vigente}",meu_email=meu_email,padrao_nome_fatura=re.compile(rf'Nubank_{(ano_vigente)}-0{(mes_vigente)}-(0[1-9]|[12][0-9]|3[01]).pdf'))
                                
                               
     salva_fatura.salva_pdf()

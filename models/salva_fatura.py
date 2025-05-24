@@ -1,6 +1,9 @@
 from imap_tools import MailBox,AND
 import os
-import re
+import tabula
+from datetime import date
+from pdf2image import convert_from_path
+import pytesseract
 
 class SalvaFatura:
     def __init__(self,email_remetente,data_envio,corpo_email_filtro,nome_fatura,meu_email,padrao_nome_fatura):
@@ -10,6 +13,8 @@ class SalvaFatura:
         self.nome_fatura = nome_fatura
         self.meu_email = meu_email
         self.padrao_nome_fatura = padrao_nome_fatura
+        self.ano_vigente = date.today().year
+        self.mes_vigente = date.today().month
 
     
 
@@ -19,7 +24,7 @@ class SalvaFatura:
         return nome_anexo
     
 
-    def cria_caminho_para_salvar_pdf(self):
+    def cria_caminho_para_salvar_arquivo(self):
         caminho_pasta_pdf = os.path.join("data_raw", "pdf")
         os.makedirs(caminho_pasta_pdf, exist_ok=True)
 
@@ -27,6 +32,7 @@ class SalvaFatura:
         caminho_pdf = os.path.join(caminho_pasta_pdf, nome_arquivo_pdf)
 
         return caminho_pdf
+    
 
 
 
@@ -37,12 +43,29 @@ class SalvaFatura:
                 for anexo in email.attachments:
                     if self.formatando_nome_anexo().search(anexo.filename):
                         info_anexo = anexo.payload
-                        with open(self.cria_caminho_para_salvar_pdf(),"wb") as fatura_pdf:
+                        with open(self.cria_caminho_para_salvar_arquivo(),"wb") as fatura_pdf:
                             fatura_pdf.write(info_anexo)
                           
                     
 
 
-    
+    def salva_csv(self,numero_da_pagina_com_tabela):
+        tabula.convert_into(self.cria_caminho_para_salvar_arquivo(),f'./data_raw/csv/{self.nome_fatura}.csv',output_format='csv',pages=numero_da_pagina_com_tabela)
 
 
+
+        
+
+
+    def salva_txt(self,numero_da_pagina_com_tabela,senha):
+        paginas = convert_from_path(self.cria_caminho_para_salvar_arquivo(),dpi=300, userpw=senha)
+        imagem = paginas[numero_da_pagina_com_tabela]
+
+        texto = pytesseract.image_to_string(imagem,lang='por')
+
+        with open(f'data_raw/txt/fatura_{self.nome_fatura}.txt', 'w', encoding='utf-8') as file:
+            file.write(texto)
+
+
+
+        

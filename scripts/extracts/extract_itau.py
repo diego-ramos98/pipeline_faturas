@@ -7,6 +7,10 @@ import re
 
 def executa_extracao_itau(USUARIO,CHAVE):
 
+    dotenv.load_dotenv()
+
+    SENHA = os.getenv("SENHA")
+
     data = FormataDatas()
     data_formatada = data.data_formatada()
     ano_vigente = data.recupera_ano_vigente()
@@ -26,5 +30,6 @@ def executa_extracao_itau(USUARIO,CHAVE):
 
 
     salva_fatura.salva_pdf()
+    salva_fatura.salva_txt(numero_da_pagina_com_tabela=1,senha=SENHA)
 
  

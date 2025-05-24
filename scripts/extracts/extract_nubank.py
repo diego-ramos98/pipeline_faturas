@@ -27,6 +27,7 @@ def executa_extracao_nubank(USUARIO,CHAVE):
                                
                               
     salva_fatura.salva_pdf()
+    salva_fatura.salva_csv('5')
 
 
 

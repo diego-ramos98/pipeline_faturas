@@ -50,22 +50,10 @@ class SalvaFatura:
 
 
     def salva_csv(self,numero_da_pagina_com_tabela):
-        tabula.convert_into(self.cria_caminho_para_salvar_arquivo(),f'./data_raw/csv/{self.nome_fatura}.csv',output_format='csv',pages=numero_da_pagina_com_tabela)
+        tabula.convert_into(self.cria_caminho_para_salvar_arquivo(),f'./data_raw/csv/{self.nome_fatura}.csv',output_format='csv',pages=numero_da_pagina_com_tabela,lattice=False)
 
 
 
         
-
-
-    def salva_txt(self,numero_da_pagina_com_tabela,senha):
-        paginas = convert_from_path(self.cria_caminho_para_salvar_arquivo(),dpi=300, userpw=senha)
-        imagem = paginas[numero_da_pagina_com_tabela]
-
-        texto = pytesseract.image_to_string(imagem,lang='por')
-
-        with open(f'data_raw/txt/fatura_{self.nome_fatura}.txt', 'w', encoding='utf-8') as file:
-            file.write(texto)
-
-
 
         

@@ -50,7 +50,7 @@ class SalvaFatura:
 
 
     def salva_csv(self,numero_da_pagina_com_tabela):
-        tabula.convert_into(self.cria_caminho_para_salvar_arquivo(),f'./data_raw/csv/{self.nome_fatura}.csv',output_format='csv',pages=numero_da_pagina_com_tabela,lattice=False)
+        tabula.convert_into(self.cria_caminho_para_salvar_arquivo(),f'./data_raw/csv/{self.nome_fatura}.csv',output_format='csv',pages=numero_da_pagina_com_tabela)
 
 
 
